@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9ecef; /* Ash color for page content */
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #000; /* Black color for sidebar */
+            padding-top: 20px;
+            padding-left: 10px;
+            color: #fff; /* White text color */
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff; /* White text color */
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+            color: #ff0000; /* Red color for highlighted link */
+        }
+
+        .content {
+            margin-left: 200px; /* Adjusted based on sidebar width */
+            padding: 16px;
+        }
+    </style>
+    <title>{% block title %}Your App Title{% endblock %}</title>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Your App Name</h2>
+        <a href="{% url 'get_data' %}" {% if request.path == '/GetData/' %}class="active"{% endif %}>GetData</a>
+        <a href="{% url 'eda' %}" {% if request.path == '/EDA/' %}class="active"{% endif %}>EDA</a>
+        <a href="{% url 'predict' %}" {% if request.path == '/Predict/' %}class="active"{% endif %}>Predict</a>
+        <a href="{% url 'forecast' %}" {% if request.path == '/Forecast/' %}class="active"{% endif %}>Forecast</a>
+    </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
