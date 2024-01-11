@@ -1,0 +1,65 @@
+<!-- get_data.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post" action="{% url 'next_step' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="marketSelect" class="form-label">Select Market:</label>
+                    <select class="form-select" id="marketSelect" name="market">
+                        <!-- Options for selecting the market -->
+                        <option value="market1">Market 1</option>
+                        <option value="market2">Market 2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="csvInput" class="form-label">Drag and Drop CSV:</label>
+                    <input type="file" class="form-control" id="csvInput" name="csv_file" accept=".csv">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="targetVariableSelect" class="form-label">Select Target Variable:</label>
+                    <select class="form-select" id="targetVariableSelect" name="target_variable">
+                        <!-- Options for selecting the target variable -->
+                        <option value="target1">Target Variable 1</option>
+                        <option value="target2">Target Variable 2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="featureSelectionCheckbox" name="feature_selection">
+                    <label class="form-check-label" for="featureSelectionCheckbox">Auto Feature Selection</label>
+                </div>
+
+                <div class="mb-3" id="manualFeatureSelection" style="display: none;">
+                    <label for="manualFeatureSelect" class="form-label">Manual Feature Selection:</label>
+                    <select multiple class="form-select" id="manualFeatureSelect" name="manual_features">
+                        <!-- Options for manual feature selection -->
+                        <option value="feature1">Feature 1</option>
+                        <option value="feature2">Feature 2</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Next</button>
+    </form>
+
+    <script>
+        // Script to show/hide manual feature selection based on checkbox
+        const featureSelectionCheckbox = document.getElementById('featureSelectionCheckbox');
+        const manualFeatureSelection = document.getElementById('manualFeatureSelection');
+
+        featureSelectionCheckbox.addEventListener('change', function () {
+            manualFeatureSelection.style.display = this.checked ? 'block' : 'none';
+        });
+    </script>
+{% endblock %}
